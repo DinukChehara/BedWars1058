@@ -25,6 +25,7 @@ import com.andrei1058.bedwars.arena.Arena;
 import com.andrei1058.bedwars.shop.main.CategoryContent;
 import com.andrei1058.bedwars.shop.main.ShopCategory;
 import lombok.Getter;
+import lombok.Setter;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
@@ -36,8 +37,9 @@ public class ShopCache {
 
     @Getter
     private UUID player;
-    @Getter
     private List<CachedItem> cachedItems = new LinkedList<>();
+    @Getter
+    @Setter
     private int selectedCategory;
     private HashMap<ShopCategory, Byte> categoryWeight = new HashMap<>();
 
@@ -99,11 +101,6 @@ public class ShopCache {
             return tier;
         }
 
-        public void downgradeIfPossible() {
-            if (cc.isDowngradable() && tier > 1)
-                tier--;
-        }
-
         public CategoryContent getCc() {
             return cc;
         }
@@ -114,7 +111,7 @@ public class ShopCache {
          */
         public void manageDeath(Arena arena) {
             if (!cc.isPermanent()) return;
-            downgradeIfPossible();
+            if (cc.isDowngradable() && tier > 1) tier--;
             BedWars.debug("ShopCache Item Restore: " + cc.getIdentifier() + " for " + player);
             //noinspection ConstantConditions
             cc.giveItems(Bukkit.getPlayer(player), getShopCache(player), arena);
@@ -216,12 +213,7 @@ public class ShopCache {
         return ci;
     }
 
-    public void setSelectedCategory(int slot) {
-        this.selectedCategory = slot;
-    }
-
     public List<CachedItem> getCachedItems() {
         return cachedItems;
     }
-
 }

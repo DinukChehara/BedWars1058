@@ -480,7 +480,6 @@ public class CategoryContent implements ICategoryContent {
         return identifier;
     }
 
-    @Override
     public List<IContentTier> getContentTiers() {
         return contentTiers;
     }

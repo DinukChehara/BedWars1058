@@ -67,14 +67,12 @@ import com.andrei1058.bedwars.listeners.blockstatus.BlockStatusListener;
 import com.andrei1058.bedwars.listeners.dropshandler.PlayerDrops;
 import com.andrei1058.bedwars.money.internal.MoneyPerMinuteTask;
 import com.andrei1058.bedwars.shop.ShopCache;
-import com.andrei1058.bedwars.shop.main.CategoryContent;
 import com.andrei1058.bedwars.sidebar.BwSidebar;
 import com.andrei1058.bedwars.sidebar.SidebarService;
 import com.andrei1058.bedwars.support.citizens.JoinNPC;
 import com.andrei1058.bedwars.support.paper.TeleportManager;
 import com.andrei1058.bedwars.support.papi.SupportPAPI;
 import com.andrei1058.bedwars.support.vault.WithEconomy;
-import lombok.Getter;
 import net.md_5.bungee.api.chat.ClickEvent;
 import net.md_5.bungee.api.chat.TextComponent;
 import org.bukkit.*;
@@ -108,11 +106,6 @@ import static com.andrei1058.bedwars.arena.upgrades.BaseListener.isOnABase;
 public class Arena implements IArena {
 
     private static final HashMap<String, IArena> arenaByName = new HashMap<>();
-    /**
-     * -- GETTER --
-     *  Get arena by players list.
-     */
-    @Getter
     private static final HashMap<Player, IArena> arenaByPlayer = new HashMap<>();
     private static final HashMap<String, IArena> arenaByIdentifier = new HashMap<>();
     private static final LinkedList<IArena> arenas = new LinkedList<>();
@@ -142,9 +135,6 @@ public class Arena implements IArena {
 
     /**
      * Current event, used at scoreboard
-     * -- GETTER --
-     *  Get next event.
-
      */
     private NextEvent nextEvent = NextEvent.DIAMOND_GENERATOR_TIER_II;
     private int diamondTier = 1, emeraldTier = 1;
@@ -781,20 +771,8 @@ public class Arena implements IArena {
 
         List<ShopCache.CachedItem> cacheList = new ArrayList<>();
         if (ShopCache.getShopCache(p.getUniqueId()) != null) {
-            //noinspection ConstantConditions < (tomqnto) idk wat this is dont ask me :)
-            for (ShopCache.CachedItem ci : ShopCache.getShopCache(p.getUniqueId()).getCachedItems()) {
-                CategoryContent cc = ci.getCc();
-                if (cc.isDowngradable()) {
-                    ci.downgradeIfPossible();
-                    cacheList.add(ci);
-                    break;
-                }
-                if (cc.isPermanent()) {
-                    cacheList.add(ci);
-                    break;
-                }
-
-            }
+            //noinspection ConstantConditions
+            cacheList = ShopCache.getShopCache(p.getUniqueId()).getCachedPermanents();
         }
 
         LastHit lastHit = LastHit.getLastHit(p);
@@ -2116,6 +2094,20 @@ public class Arena implements IArena {
     }
 
     /**
+     * Get arena by players list.
+     */
+    public static HashMap<Player, IArena> getArenaByPlayer() {
+        return arenaByPlayer;
+    }
+
+    /**
+     * Get next event.
+     */
+    public NextEvent getNextEvent() {
+        return nextEvent;
+    }
+
+    /**
      * Get players count for a group
      */
     public static int getPlayers(@NotNull String group) {
@@ -2725,10 +2717,5 @@ public class Arena implements IArena {
     @Override
     public GameStatsHolder getStatsHolder() {
         return gameStats;
-    }
-
-    @Override
-    public NextEvent getNextEvent() {
-        return nextEvent;
     }
 }
