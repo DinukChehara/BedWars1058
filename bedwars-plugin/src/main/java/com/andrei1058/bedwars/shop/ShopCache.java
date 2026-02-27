@@ -101,6 +101,11 @@ public class ShopCache {
             return tier;
         }
 
+        public void downgradeIfPossible() {
+            if (cc.isDowngradable() && tier>1)
+                tier--;
+        }
+
         public CategoryContent getCc() {
             return cc;
         }
@@ -111,7 +116,7 @@ public class ShopCache {
          */
         public void manageDeath(Arena arena) {
             if (!cc.isPermanent()) return;
-            if (cc.isDowngradable() && tier > 1) tier--;
+            downgradeIfPossible();
             BedWars.debug("ShopCache Item Restore: " + cc.getIdentifier() + " for " + player);
             //noinspection ConstantConditions
             cc.giveItems(Bukkit.getPlayer(player), getShopCache(player), arena);

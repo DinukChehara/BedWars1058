@@ -67,6 +67,7 @@ import com.andrei1058.bedwars.listeners.blockstatus.BlockStatusListener;
 import com.andrei1058.bedwars.listeners.dropshandler.PlayerDrops;
 import com.andrei1058.bedwars.money.internal.MoneyPerMinuteTask;
 import com.andrei1058.bedwars.shop.ShopCache;
+import com.andrei1058.bedwars.shop.main.CategoryContent;
 import com.andrei1058.bedwars.sidebar.BwSidebar;
 import com.andrei1058.bedwars.sidebar.SidebarService;
 import com.andrei1058.bedwars.support.citizens.JoinNPC;
@@ -772,7 +773,16 @@ public class Arena implements IArena {
         List<ShopCache.CachedItem> cacheList = new ArrayList<>();
         if (ShopCache.getShopCache(p.getUniqueId()) != null) {
             //noinspection ConstantConditions
-            cacheList = ShopCache.getShopCache(p.getUniqueId()).getCachedPermanents();
+            for (ShopCache.CachedItem ci : ShopCache.getShopCache(p.getUniqueId()).getCachedItems()) {
+                CategoryContent cc = ci.getCc();
+                if (cc.isDowngradable()) {
+                    ci.downgradeIfPossible();
+                    cacheList.add(ci);
+                    break;
+                }
+                if (cc.isPermanent())
+                    cacheList.add(ci);
+            }
         }
 
         LastHit lastHit = LastHit.getLastHit(p);
