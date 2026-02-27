@@ -32,6 +32,7 @@ import com.andrei1058.bedwars.configuration.Sounds;
 import com.andrei1058.bedwars.lobbysocket.ArenaSocket;
 import com.andrei1058.bedwars.shop.ShopCache;
 import com.google.gson.JsonObject;
+import lombok.Getter;
 import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
 import org.bukkit.entity.Player;
@@ -47,9 +48,24 @@ import static com.andrei1058.bedwars.api.language.Language.getMsg;
 
 public class ReJoin {
 
+    /**
+     * -- GETTER --
+     *  Get Player
+     */
+    @Getter
     private UUID player;
+    /**
+     * -- GETTER --
+     *  Get arena
+     */
     private IArena arena;
+    /**
+     * -- GETTER --
+     *  Get player team
+     */
+    @Getter
     private ITeam bwt;
+    @Getter
     private ReJoinTask task = null;
     private final ArrayList<ShopCache.CachedItem> permanentsAndNonDowngradables = new ArrayList<>();
 
@@ -184,31 +200,6 @@ public class ReJoin {
         }
     }
 
-    /**
-     * Get Player
-     */
-    public UUID getPlayer() {
-        return player;
-    }
-
-    /**
-     * Get player team
-     */
-    public ITeam getBwt() {
-        return bwt;
-    }
-
-    /**
-     * Get arena
-     */
-    public IArena getArena() {
-        return arena;
-    }
-
-    public ReJoinTask getTask() {
-        return task;
-    }
-
     public UUID getPl() {
         return player;
     }
@@ -228,5 +219,9 @@ public class ReJoin {
         if (!(o instanceof ReJoin)) return false;
         ReJoin reJoin = (ReJoin) o;
         return reJoin.getPl().equals(getPl());
+    }
+
+    public IArena getArena() {
+        return arena;
     }
 }
