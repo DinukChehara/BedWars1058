@@ -24,6 +24,7 @@ import com.andrei1058.bedwars.BedWars;
 import com.andrei1058.bedwars.api.arena.IArena;
 import com.andrei1058.bedwars.api.arena.team.ITeam;
 import com.andrei1058.bedwars.api.configuration.ConfigPath;
+import lombok.Getter;
 import org.bukkit.Bukkit;
 import org.bukkit.scheduler.BukkitTask;
 import org.jetbrains.annotations.Contract;
@@ -38,6 +39,11 @@ public class ReJoinTask implements Runnable {
 
     private static final List<ReJoinTask> reJoinTasks = new ArrayList<>();
 
+    /**
+     * -- GETTER --
+     *  Get arena
+     */
+    @Getter
     private final IArena arena;
     private final ITeam bedWarsTeam;
     private final BukkitTask task;
@@ -66,13 +72,6 @@ public class ReJoinTask implements Runnable {
             bedWarsTeam.setBedDestroyed(true);
             destroy();
         }
-    }
-
-    /**
-     * Get arena
-     */
-    public IArena getArena() {
-        return arena;
     }
 
     /**

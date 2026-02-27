@@ -52,11 +52,10 @@ public class ShoutCommand extends BukkitCommand {
             return true;
         }
         StringBuilder sb = new StringBuilder();
-        for (String ar : args) {
+        for (String ar : args)
             sb.append(ar).append(" ");
-        }
 
-        p.chat("!" + sb.toString());
+        p.chat("!" + sb);
         return false;
     }
 

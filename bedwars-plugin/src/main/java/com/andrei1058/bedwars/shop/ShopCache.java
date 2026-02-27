@@ -24,6 +24,8 @@ import com.andrei1058.bedwars.BedWars;
 import com.andrei1058.bedwars.arena.Arena;
 import com.andrei1058.bedwars.shop.main.CategoryContent;
 import com.andrei1058.bedwars.shop.main.ShopCategory;
+import lombok.Getter;
+import lombok.Setter;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
@@ -33,8 +35,11 @@ import java.util.*;
 
 public class ShopCache {
 
+    @Getter
     private UUID player;
     private List<CachedItem> cachedItems = new LinkedList<>();
+    @Getter
+    @Setter
     private int selectedCategory;
     private HashMap<ShopCategory, Byte> categoryWeight = new HashMap<>();
 
@@ -44,18 +49,6 @@ public class ShopCache {
         this.player = player;
         this.selectedCategory = ShopManager.getShop().getQuickBuyButton().getSlot();
         shopCaches.add(this);
-    }
-
-    public UUID getPlayer() {
-        return player;
-    }
-
-    public void setSelectedCategory(int slot) {
-        this.selectedCategory = slot;
-    }
-
-    public int getSelectedCategory() {
-        return selectedCategory;
     }
 
     public int getContentTier(String identifier) {

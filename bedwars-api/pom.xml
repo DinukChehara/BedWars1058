@@ -46,11 +46,15 @@
             <version>1.16.5-R0.1-SNAPSHOT</version>
             <scope>compile</scope>
         </dependency>
-        <!-- SIDEBAR LIB -->
         <dependency>
             <groupId>com.andrei1058.spigot.sidebar</groupId>
             <artifactId>sidebar-base</artifactId>
-            <version>23.2</version>
+            <version>25.2.2-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>com.andrei1058.spigot.sidebar</groupId>
+            <artifactId>sidebar-v1_8_R3</artifactId>
+            <version>25.2.2-SNAPSHOT</version>
         </dependency>
     </dependencies>
     <build>

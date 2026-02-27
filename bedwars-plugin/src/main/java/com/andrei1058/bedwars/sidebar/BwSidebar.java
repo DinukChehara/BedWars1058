@@ -242,6 +242,11 @@ public class BwSidebar implements ISidebar {
         tabList.giveUpdateTabFormat(player, skipStateCheck, spectator);
     }
 
+    @Override
+    public void giveUpdateTabFormat(@NotNull Player player, boolean skipStateCheck) {
+        ISidebar.super.giveUpdateTabFormat(player, skipStateCheck);
+    }
+
     @SuppressWarnings("removal")
     @Override
     public boolean isTabFormattingDisabled() {
@@ -566,7 +571,6 @@ public class BwSidebar implements ISidebar {
         SidebarManager.getInstance().sendHeaderFooter(player, headerFooter);
     }
 
-    @Override
     public boolean registerPersistentPlaceholder(PlaceholderProvider placeholderProvider) {
         this.persistentProviders.add(placeholderProvider);
         return true;

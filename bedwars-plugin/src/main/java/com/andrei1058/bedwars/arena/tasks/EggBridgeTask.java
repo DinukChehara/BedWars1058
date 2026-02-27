@@ -28,6 +28,7 @@ import com.andrei1058.bedwars.arena.Arena;
 import com.andrei1058.bedwars.arena.Misc;
 import com.andrei1058.bedwars.configuration.Sounds;
 import com.andrei1058.bedwars.listeners.EggBridge;
+import lombok.Getter;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -41,9 +42,13 @@ import static com.andrei1058.bedwars.BedWars.nms;
 @SuppressWarnings("WeakerAccess")
 public class EggBridgeTask implements Runnable {
 
+    @Getter
     private Egg projectile;
+    @Getter
     private TeamColor teamColor;
+    @Getter
     private Player player;
+    @Getter
     private IArena arena;
     private BukkitTask task;
 
@@ -55,22 +60,6 @@ public class EggBridgeTask implements Runnable {
         this.teamColor = teamColor;
         this.player = player;
         task = Bukkit.getScheduler().runTaskTimer(BedWars.plugin, this, 0, 1);
-    }
-
-    public TeamColor getTeamColor() {
-        return teamColor;
-    }
-
-    public Egg getProjectile() {
-        return projectile;
-    }
-
-    public Player getPlayer() {
-        return player;
-    }
-
-    public IArena getArena() {
-        return arena;
     }
 
     @Override
