@@ -22,7 +22,6 @@ package com.andrei1058.bedwars.halloween;
 
 import com.andrei1058.bedwars.BedWars;
 import com.andrei1058.bedwars.api.arena.IArena;
-import lombok.Getter;
 import org.bukkit.Bukkit;
 import org.bukkit.block.Block;
 
@@ -35,11 +34,9 @@ public class CobWebRemover {
 
     private static final LinkedHashMap<IArena, CobWebRemover> taskByArena = new LinkedHashMap<>();
 
-    @Getter
-    private final int taskId;
-    @Getter
-    private final IArena arena;
-    private final LinkedHashMap<Block, Long> cobWebs = new LinkedHashMap<>();
+    private int taskId;
+    private IArena arena;
+    private LinkedHashMap<Block, Long> cobWebs = new LinkedHashMap<>();
 
     protected CobWebRemover(IArena arena) {
         taskByArena.remove(arena);
@@ -50,6 +47,14 @@ public class CobWebRemover {
 
     public void addCobWeb(Block block) {
         cobWebs.put(block, System.currentTimeMillis() + 7500L);
+    }
+
+    public int getTaskId() {
+        return taskId;
+    }
+
+    public IArena getArena() {
+        return arena;
     }
 
     public static CobWebRemover getByArena(IArena arena){
@@ -81,7 +86,7 @@ public class CobWebRemover {
                     }
                 }
             });
-            toBeRemoved.forEach(cobWebs::remove);
+            toBeRemoved.forEach(block -> cobWebs.remove(block));
             toBeRemoved.clear();
         }
     }

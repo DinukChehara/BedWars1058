@@ -43,7 +43,6 @@ public class ReJoinTask implements Runnable {
      * -- GETTER --
      *  Get arena
      */
-    @Getter
     private final IArena arena;
     private final ITeam bedWarsTeam;
     private final BukkitTask task;
@@ -93,5 +92,9 @@ public class ReJoinTask implements Runnable {
 
     public void cancel() {
         task.cancel();
+    }
+
+    public IArena getArena() {
+        return arena;
     }
 }

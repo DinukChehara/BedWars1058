@@ -32,7 +32,6 @@ import com.andrei1058.bedwars.commands.bedwars.subcmds.sensitive.Level;
 import com.andrei1058.bedwars.commands.bedwars.subcmds.sensitive.Reload;
 import com.andrei1058.bedwars.commands.bedwars.subcmds.sensitive.setup.*;
 import com.andrei1058.bedwars.support.citizens.JoinNPC;
-import lombok.Getter;
 import net.md_5.bungee.api.chat.ClickEvent;
 import net.md_5.bungee.api.chat.ComponentBuilder;
 import net.md_5.bungee.api.chat.HoverEvent;
@@ -54,20 +53,10 @@ import static com.andrei1058.bedwars.api.language.Language.getMsg;
 public class MainCommand extends BukkitCommand implements ParentCommand {
 
     /* SubCommands ArenaList */
-    private static final List<SubCommand> subCommandList = new ArrayList<>();
-    /**
-     * -- GETTER --
-     *  Get instance
-     */
+    private static List<SubCommand> subCommandList = new ArrayList<>();
     /* MainCommand instance*/
-    @Getter
     private static MainCommand instance;
-    /**
-     * -- GETTER --
-     *  Get a dot symbol
-     */
     /* Dot char */
-    @Getter
     @SuppressWarnings("WeakerAccess")
     public static char dot = 254;
 
@@ -226,6 +215,13 @@ public class MainCommand extends BukkitCommand implements ParentCommand {
     }
 
     /**
+     * Get instance
+     */
+    public static MainCommand getInstance() {
+        return instance;
+    }
+
+    /**
      * Check if lobby location is set, else send a error message to the player
      */
     @SuppressWarnings("BooleanMethodIsAlwaysInverted")
@@ -263,4 +259,10 @@ public class MainCommand extends BukkitCommand implements ParentCommand {
         return null;
     }
 
+    /**
+     * Get a dot symbol
+     */
+    public static char getDot() {
+        return dot;
+    }
 }

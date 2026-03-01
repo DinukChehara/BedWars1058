@@ -4,7 +4,9 @@ import com.andrei1058.bedwars.BedWars;
 import com.andrei1058.bedwars.api.arena.team.TeamColor;
 import com.andrei1058.bedwars.api.region.Region;
 import com.andrei1058.bedwars.arena.Arena;
+import org.bukkit.Location;
 import org.bukkit.Material;
+import org.bukkit.Sound;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 
@@ -20,8 +22,10 @@ public class NewPlaceBlock {
 
             if (!ladder)
                 BedWars.nms.placeTowerBlocks(b, Arena.getArenaByPlayer(p), color, x, y, z);
-            else
+            else {
                 BedWars.nms.placeLadder(b, x, y, z, Arena.getArenaByPlayer(p), ladderdata);
+                b.getWorld().playSound(b.getLocation(), Sound.CHICKEN_EGG_POP, 0.5f ,1f);
+            }
         }
 
     }
